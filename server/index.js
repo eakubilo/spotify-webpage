@@ -2,20 +2,15 @@
 const path = require("path");
 const express = require("express");
 const cors = require("cors");
-require('dotenv').config();
+var querystring = require("querystring");
+var cookieParser = require("cookie-parser");
+
+require("dotenv").config();
 
 const PORT = process.env.PORT || 3001;
 var client_id = process.env.CLIENT_ID; // Your client id
 var client_secret = process.env.CLIENT_SECRET; // Your secret
 var redirect_uri = "https://spotify-share-webpage.herokuapp.com/callback"; // Your redirect uri
-
-const app = express();
-
-app.use(express.static(path.resolve(__dirname, "../client/build")));
-
-app.get("/api", (req, res) => {
-  res.json({ message: "Hello from server!" });
-});
 
 var generateRandomString = function (length) {
   var text = "";
@@ -27,6 +22,20 @@ var generateRandomString = function (length) {
   }
   return text;
 };
+
+var stateKey = "spotify_auth_state";
+
+const app = express();
+
+app
+  .use(express.static(path.resolve(__dirname, "../client/build")))
+  .use(cors())
+  .use(cookieParser());
+
+app.get("/api", (req, res) => {
+  res.json({ message: "Hello from server!" });
+});
+
 app.get("/login", function (req, res) {
   var state = generateRandomString(16);
   res.cookie(stateKey, state);
