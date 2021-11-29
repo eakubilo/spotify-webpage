@@ -2,8 +2,8 @@
 const path = require("path");
 const express = require("express");
 const cors = require("cors");
-var querystring = require("querystring");
-var cookieParser = require("cookie-parser");
+const querystring = require("querystring");
+const cookieParser = require("cookie-parser");
 
 require("dotenv").config();
 
