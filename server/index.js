@@ -13,8 +13,11 @@ const app = express();
 app.use(express.static(path.resolve(__dirname, "../client/build")));
 
 app.get("/api", (req, res) => {
-  console.log("Hello from server!" );
+  res.json({ message: "Hello from server!" });
 });
+app.get("/testendpoint", (req, res) => {
+    res.json({ message: "You hit the endpoint!" });
+  });
 // var generateRandomString = function (length) {
 //   var text = "";
 //   var possible =
