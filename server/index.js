@@ -2,11 +2,12 @@
 const path = require("path");
 const express = require("express");
 const cors = require("cors");
+require('dotenv').config();
 
 const PORT = process.env.PORT || 3001;
-var client_id = "CLIENT_ID"; // Your client id
-var client_secret = "CLIENT_SECRET"; // Your secret
-var redirect_uri = "REDIRECT_URI"; // Your redirect uri
+var client_id = process.env.CLIENT_ID; // Your client id
+var client_secret = process.env.CLIENT_SECRET; // Your secret
+var redirect_uri = "https://spotify-share-webpage.herokuapp.com/callback"; // Your redirect uri
 
 const app = express();
 
